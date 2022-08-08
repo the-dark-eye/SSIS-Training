@@ -1,0 +1,1613 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="7/14/2022 4:36:28 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="DESKTOP-9D3KSBK"
+  DTS:CreatorName="DESKTOP-9D3KSBK\Nilesh Kala"
+  DTS:DTSID="{6263D99C-8821-46E1-B7FE-0EBC89D884B3}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.521.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Pivot Transformation"
+  DTS:PackageType="5"
+  DTS:VersionBuild="33"
+  DTS:VersionGUID="{B85CE98A-DED5-4D1E-81A1-66D700903561}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[DESKTOP-9D3KSBK.Global Superstore]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{42D8A290-7896-4654-888A-2F4F34524F3D}"
+      DTS:ObjectName="DESKTOP-9D3KSBK.Global Superstore">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=DESKTOP-9D3KSBK;Initial Catalog=Global Superstore;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Global Superstore Connection]"
+      DTS:CreationName="EXCEL"
+      DTS:DTSID="{3B7A6D7F-3FCC-45EA-BA72-913CB6E00B84}"
+      DTS:ObjectName="Global Superstore Connection">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="0"
+          DTS:ConnectRetryInterval="0"
+          DTS:ConnectionString="Provider=Microsoft.Jet.OLEDB.4.0;Data Source=C:\Users\Nilesh Kala\Desktop\WoodStream\Training\Global Superstore\archive\Global Superstore.xls;Extended Properties=&quot;EXCEL 8.0;HDR=YES&quot;;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Pivot Transformation"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{4F2C4B5B-4151-4ED2-A856-78BF81016D2D}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Pivot Transformation"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Pivot Transformation\Aggregate"
+              componentClassID="Microsoft.Aggregate"
+              contactInfo="Aggregate;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;3"
+              description="Aggregates data with functions such as Average, Sum, Count, Max, and Min. For example, group data to compute the sum of sales per product or the average visits per day."
+              name="Aggregate"
+              version="3">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the approximate number of group by keys that the aggregation produces. Low indicates 500,000 key values, Medium indicates 5 million key values, and High indicates more than 25 million key values. Unspecified indicates no KeyScale value is used."
+                  name="KeyScale"
+                  typeConverter="KeyScaleType">0</property>
+                <property
+                  dataType="System.Null"
+                  description="Specifies the exact number of group by keys that the aggregation produces. If a KeyScale value is specified, the value in Keys takes precedence."
+                  name="Keys" />
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the approximate number of distinct values in a column that the aggregation counts distinctly. Low indicates 500,000 key values, Medium indicates 5 million key values, and High indicates more than 25 million key values. Unspecified indicates no CountDistinctScale value is used."
+                  name="CountDistinctScale"
+                  typeConverter="KeyScaleType">0</property>
+                <property
+                  dataType="System.Null"
+                  description="Specifies the exact number of distinct values in a column that the aggregation counts distinctly. If a CountDistinctScale value is specified, the value in CountDistinctKeys takes precedence."
+                  name="CountDistinctKeys" />
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage by which memory can be extended during the aggregation. Valid values are between 1 and 100."
+                  name="AutoExtendFactor">25</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\Pivot Transformation\Aggregate.Inputs[Aggregate Input 1]"
+                  name="Aggregate Input 1">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Pivot Transformation\Aggregate.Inputs[Aggregate Input 1].Columns[Year]"
+                      cachedDataType="i4"
+                      cachedName="Year"
+                      lineageId="Package\Pivot Transformation\Generate Date Ranges.Outputs[Derived Column Output].Columns[Year]" />
+                    <inputColumn
+                      refId="Package\Pivot Transformation\Aggregate.Inputs[Aggregate Input 1].Columns[Sales]"
+                      cachedDataType="r8"
+                      cachedName="Sales"
+                      lineageId="Package\Pivot Transformation\Global Superstore.Outputs[Excel Source Output].Columns[Sales]" />
+                    <inputColumn
+                      refId="Package\Pivot Transformation\Aggregate.Inputs[Aggregate Input 1].Columns[Month]"
+                      cachedDataType="i4"
+                      cachedName="Month"
+                      lineageId="Package\Pivot Transformation\Generate Date Ranges.Outputs[Derived Column Output].Columns[Month]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Pivot Transformation\Aggregate.Outputs[Aggregate Output 1]"
+                  name="Aggregate Output 1">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the approximate number of group by keys that the aggregation produces. Low indicates 500,000 key values, Medium indicates 5 million key values, and High indicates more than 25 million key values. Unspecified indicates no KeyScale value is used."
+                      name="KeyScale"
+                      typeConverter="KeyScaleType">0</property>
+                    <property
+                      dataType="System.Null"
+                      description="Specifies the exact number of group by keys that the aggregation produces. If a KeyScale value is specified, the value in Keys takes precedence."
+                      name="Keys" />
+                  </properties>
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Pivot Transformation\Aggregate.Outputs[Aggregate Output 1].Columns[Year]"
+                      dataType="i4"
+                      lineageId="Package\Pivot Transformation\Aggregate.Outputs[Aggregate Output 1].Columns[Year]"
+                      name="Year">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the ID of the input column used in the aggregation."
+                          name="AggregationColumnId">#{Package\Pivot Transformation\Generate Date Ranges.Outputs[Derived Column Output].Columns[Year]}</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the type of aggregation."
+                          name="AggregationType"
+                          typeConverter="AggregationType">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Indicates whether the column requires special handling because it may contain oversized data or it requires precision beyond a float data type."
+                          name="IsBig">1</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the string comparison options."
+                          name="AggregationComparisonFlags">0</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Pivot Transformation\Aggregate.Outputs[Aggregate Output 1].Columns[Month]"
+                      dataType="i4"
+                      lineageId="Package\Pivot Transformation\Aggregate.Outputs[Aggregate Output 1].Columns[Month]"
+                      name="Month">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the ID of the input column used in the aggregation."
+                          name="AggregationColumnId">#{Package\Pivot Transformation\Generate Date Ranges.Outputs[Derived Column Output].Columns[Month]}</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the type of aggregation."
+                          name="AggregationType"
+                          typeConverter="AggregationType">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Indicates whether the column requires special handling because it may contain oversized data or it requires precision beyond a float data type."
+                          name="IsBig">1</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the string comparison options."
+                          name="AggregationComparisonFlags">0</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Pivot Transformation\Aggregate.Outputs[Aggregate Output 1].Columns[Sales]"
+                      dataType="r8"
+                      lineageId="Package\Pivot Transformation\Aggregate.Outputs[Aggregate Output 1].Columns[Sales]"
+                      name="Sales">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the ID of the input column used in the aggregation."
+                          name="AggregationColumnId">#{Package\Pivot Transformation\Global Superstore.Outputs[Excel Source Output].Columns[Sales]}</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the type of aggregation."
+                          name="AggregationType"
+                          typeConverter="AggregationType">4</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Indicates whether the column requires special handling because it may contain oversized data or it requires precision beyond a float data type."
+                          name="IsBig">1</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the string comparison options."
+                          name="AggregationComparisonFlags">0</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Pivot Transformation\Generate Date Ranges"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Generate Date Ranges"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Pivot Transformation\Generate Date Ranges.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Pivot Transformation\Generate Date Ranges.Inputs[Derived Column Input].Columns[Order Date]"
+                      cachedDataType="date"
+                      cachedName="Order Date"
+                      lineageId="Package\Pivot Transformation\Global Superstore.Outputs[Excel Source Output].Columns[Order Date]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Pivot Transformation\Generate Date Ranges.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\Pivot Transformation\Generate Date Ranges.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Pivot Transformation\Generate Date Ranges.Outputs[Derived Column Output].Columns[Year]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Pivot Transformation\Generate Date Ranges.Outputs[Derived Column Output].Columns[Year]"
+                      name="Year"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[YEAR](#{Package\Pivot Transformation\Global Superstore.Outputs[Excel Source Output].Columns[Order Date]})</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">YEAR([Order Date])</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Pivot Transformation\Generate Date Ranges.Outputs[Derived Column Output].Columns[Month]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Pivot Transformation\Generate Date Ranges.Outputs[Derived Column Output].Columns[Month]"
+                      name="Month"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[MONTH](#{Package\Pivot Transformation\Global Superstore.Outputs[Excel Source Output].Columns[Order Date]})</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">MONTH([Order Date])</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Pivot Transformation\Generate Date Ranges.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\Pivot Transformation\Generate Date Ranges.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Pivot Transformation\Generate Date Ranges.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Pivot Transformation\Generate Date Ranges.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Pivot Transformation\Generate Date Ranges.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Pivot Transformation\Generate Date Ranges.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Pivot Transformation\Global Superstore"
+              componentClassID="Microsoft.ExcelSource"
+              contactInfo="Excel Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Excel Source"
+              name="Global Superstore"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">Orders$</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mapping from parameters in the SQL command to variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Pivot Transformation\Global Superstore.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Global Superstore Connection]"
+                  connectionManagerRefId="Package.ConnectionManagers[Global Superstore Connection]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Pivot Transformation\Global Superstore.Outputs[Excel Source Output]"
+                  name="Excel Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Pivot Transformation\Global Superstore.Outputs[Excel Source Output].Columns[Order Date]"
+                      dataType="date"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Pivot Transformation\Global Superstore.Outputs[Excel Source Output].ExternalColumns[Order Date]"
+                      lineageId="Package\Pivot Transformation\Global Superstore.Outputs[Excel Source Output].Columns[Order Date]"
+                      name="Order Date"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Pivot Transformation\Global Superstore.Outputs[Excel Source Output].Columns[Sales]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Pivot Transformation\Global Superstore.Outputs[Excel Source Output].ExternalColumns[Sales]"
+                      lineageId="Package\Pivot Transformation\Global Superstore.Outputs[Excel Source Output].Columns[Sales]"
+                      name="Sales"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Pivot Transformation\Global Superstore.Outputs[Excel Source Output].ExternalColumns[Row ID]"
+                      dataType="r8"
+                      name="Row ID" />
+                    <externalMetadataColumn
+                      refId="Package\Pivot Transformation\Global Superstore.Outputs[Excel Source Output].ExternalColumns[Order ID]"
+                      dataType="wstr"
+                      length="255"
+                      name="Order ID" />
+                    <externalMetadataColumn
+                      refId="Package\Pivot Transformation\Global Superstore.Outputs[Excel Source Output].ExternalColumns[Order Date]"
+                      dataType="date"
+                      name="Order Date" />
+                    <externalMetadataColumn
+                      refId="Package\Pivot Transformation\Global Superstore.Outputs[Excel Source Output].ExternalColumns[Ship Date]"
+                      dataType="date"
+                      name="Ship Date" />
+                    <externalMetadataColumn
+                      refId="Package\Pivot Transformation\Global Superstore.Outputs[Excel Source Output].ExternalColumns[Ship Mode]"
+                      dataType="wstr"
+                      length="255"
+                      name="Ship Mode" />
+                    <externalMetadataColumn
+                      refId="Package\Pivot Transformation\Global Superstore.Outputs[Excel Source Output].ExternalColumns[Customer ID]"
+                      dataType="wstr"
+                      length="255"
+                      name="Customer ID" />
+                    <externalMetadataColumn
+                      refId="Package\Pivot Transformation\Global Superstore.Outputs[Excel Source Output].ExternalColumns[Customer Name]"
+                      dataType="wstr"
+                      length="255"
+                      name="Customer Name" />
+                    <externalMetadataColumn
+                      refId="Package\Pivot Transformation\Global Superstore.Outputs[Excel Source Output].ExternalColumns[Segment]"
+                      dataType="wstr"
+                      length="255"
+                      name="Segment" />
+                    <externalMetadataColumn
+                      refId="Package\Pivot Transformation\Global Superstore.Outputs[Excel Source Output].ExternalColumns[City]"
+                      dataType="wstr"
+                      length="255"
+                      name="City" />
+                    <externalMetadataColumn
+                      refId="Package\Pivot Transformation\Global Superstore.Outputs[Excel Source Output].ExternalColumns[State]"
+                      dataType="wstr"
+                      length="255"
+                      name="State" />
+                    <externalMetadataColumn
+                      refId="Package\Pivot Transformation\Global Superstore.Outputs[Excel Source Output].ExternalColumns[Country]"
+                      dataType="wstr"
+                      length="255"
+                      name="Country" />
+                    <externalMetadataColumn
+                      refId="Package\Pivot Transformation\Global Superstore.Outputs[Excel Source Output].ExternalColumns[Postal Code]"
+                      dataType="r8"
+                      name="Postal Code" />
+                    <externalMetadataColumn
+                      refId="Package\Pivot Transformation\Global Superstore.Outputs[Excel Source Output].ExternalColumns[Market]"
+                      dataType="wstr"
+                      length="255"
+                      name="Market" />
+                    <externalMetadataColumn
+                      refId="Package\Pivot Transformation\Global Superstore.Outputs[Excel Source Output].ExternalColumns[Region]"
+                      dataType="wstr"
+                      length="255"
+                      name="Region" />
+                    <externalMetadataColumn
+                      refId="Package\Pivot Transformation\Global Superstore.Outputs[Excel Source Output].ExternalColumns[Product ID]"
+                      dataType="wstr"
+                      length="255"
+                      name="Product ID" />
+                    <externalMetadataColumn
+                      refId="Package\Pivot Transformation\Global Superstore.Outputs[Excel Source Output].ExternalColumns[Category]"
+                      dataType="wstr"
+                      length="255"
+                      name="Category" />
+                    <externalMetadataColumn
+                      refId="Package\Pivot Transformation\Global Superstore.Outputs[Excel Source Output].ExternalColumns[Sub-Category]"
+                      dataType="wstr"
+                      length="255"
+                      name="Sub-Category" />
+                    <externalMetadataColumn
+                      refId="Package\Pivot Transformation\Global Superstore.Outputs[Excel Source Output].ExternalColumns[Product Name]"
+                      dataType="wstr"
+                      length="255"
+                      name="Product Name" />
+                    <externalMetadataColumn
+                      refId="Package\Pivot Transformation\Global Superstore.Outputs[Excel Source Output].ExternalColumns[Sales]"
+                      dataType="r8"
+                      name="Sales" />
+                    <externalMetadataColumn
+                      refId="Package\Pivot Transformation\Global Superstore.Outputs[Excel Source Output].ExternalColumns[Quantity]"
+                      dataType="r8"
+                      name="Quantity" />
+                    <externalMetadataColumn
+                      refId="Package\Pivot Transformation\Global Superstore.Outputs[Excel Source Output].ExternalColumns[Discount]"
+                      dataType="r8"
+                      name="Discount" />
+                    <externalMetadataColumn
+                      refId="Package\Pivot Transformation\Global Superstore.Outputs[Excel Source Output].ExternalColumns[Profit]"
+                      dataType="r8"
+                      name="Profit" />
+                    <externalMetadataColumn
+                      refId="Package\Pivot Transformation\Global Superstore.Outputs[Excel Source Output].ExternalColumns[Shipping Cost]"
+                      dataType="r8"
+                      name="Shipping Cost" />
+                    <externalMetadataColumn
+                      refId="Package\Pivot Transformation\Global Superstore.Outputs[Excel Source Output].ExternalColumns[Order Priority]"
+                      dataType="wstr"
+                      length="255"
+                      name="Order Priority" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Pivot Transformation\Global Superstore.Outputs[Excel Source Error Output]"
+                  isErrorOut="true"
+                  name="Excel Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Pivot Transformation\Global Superstore.Outputs[Excel Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Pivot Transformation\Global Superstore.Outputs[Excel Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Pivot Transformation\Global Superstore.Outputs[Excel Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Pivot Transformation\Global Superstore.Outputs[Excel Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                    <outputColumn
+                      refId="Package\Pivot Transformation\Global Superstore.Outputs[Excel Source Error Output].Columns[Order Date]"
+                      dataType="date"
+                      lineageId="Package\Pivot Transformation\Global Superstore.Outputs[Excel Source Error Output].Columns[Order Date]"
+                      name="Order Date" />
+                    <outputColumn
+                      refId="Package\Pivot Transformation\Global Superstore.Outputs[Excel Source Error Output].Columns[Sales]"
+                      dataType="r8"
+                      lineageId="Package\Pivot Transformation\Global Superstore.Outputs[Excel Source Error Output].Columns[Sales]"
+                      name="Sales" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Pivot Transformation\Multicast"
+              componentClassID="Microsoft.Multicast"
+              contactInfo="Multicast;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Distributes every input row to every row in one or more outputs. For example, branch your data flow to make a copy of data so that some values can be masked before sharing with external partners."
+              name="Multicast">
+              <inputs>
+                <input
+                  refId="Package\Pivot Transformation\Multicast.Inputs[Multicast Input 1]"
+                  name="Multicast Input 1">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Pivot Transformation\Multicast.Outputs[Multicast Output 1]"
+                  deleteOutputOnPathDetached="true"
+                  name="Multicast Output 1"
+                  synchronousInputId="Package\Pivot Transformation\Multicast.Inputs[Multicast Input 1]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Pivot Transformation\Multicast.Outputs[Multicast Output 2]"
+                  dangling="true"
+                  deleteOutputOnPathDetached="true"
+                  name="Multicast Output 2"
+                  synchronousInputId="Package\Pivot Transformation\Multicast.Inputs[Multicast Input 1]">
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Pivot Transformation\Multicast 1"
+              componentClassID="Microsoft.Multicast"
+              contactInfo="Multicast;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Distributes every input row to every row in one or more outputs. For example, branch your data flow to make a copy of data so that some values can be masked before sharing with external partners."
+              name="Multicast 1">
+              <inputs>
+                <input
+                  refId="Package\Pivot Transformation\Multicast 1.Inputs[Multicast Input 1]"
+                  name="Multicast Input 1">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Pivot Transformation\Multicast 1.Outputs[Multicast Output 1]"
+                  dangling="true"
+                  deleteOutputOnPathDetached="true"
+                  name="Multicast Output 1"
+                  synchronousInputId="Package\Pivot Transformation\Multicast 1.Inputs[Multicast Input 1]">
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Pivot Transformation\Pivot"
+              componentClassID="Microsoft.Pivot"
+              contactInfo="Pivot;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Compacts an input data flow by pivoting it on a column value, making it less normalized. The input data should be sorted by the pivot column because a pivot happens each time data in the pivot column changes. Note: duplicate rows will cause this transformation to fail."
+              name="Pivot"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Causes the Pivot Transform to ignore rows containing unrecognized values in the Pivot Key column and to report the complete list of unmatched values at the end of DataFlow execution. Useful for collecting a list of values from input rows that can be used to automatically generate output columns."
+                  name="PassThroughUnmatchedPivotKeys">true</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\Pivot Transformation\Pivot.Inputs[Pivot Default Input]"
+                  hasSideEffects="true"
+                  name="Pivot Default Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Pivot Transformation\Pivot.Inputs[Pivot Default Input].Columns[Sales]"
+                      cachedDataType="r8"
+                      cachedName="Sales"
+                      lineageId="Package\Pivot Transformation\Sort.Outputs[Sort Output].Columns[Sales]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Describes how the input column participates in the pivot operation. It can help define a set of related records, it can hold the key that uniquely identifies a row within the related set and upon which the values are pivoted, it can hold a value that gets transferred into a pivoted column or it can contain a value that simply passes straight though the pivot unchanged."
+                          name="PivotUsage">3</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Pivot Transformation\Pivot.Inputs[Pivot Default Input].Columns[Month]"
+                      cachedDataType="i4"
+                      cachedName="Month"
+                      lineageId="Package\Pivot Transformation\Sort.Outputs[Sort Output].Columns[Month]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Describes how the input column participates in the pivot operation. It can help define a set of related records, it can hold the key that uniquely identifies a row within the related set and upon which the values are pivoted, it can hold a value that gets transferred into a pivoted column or it can contain a value that simply passes straight though the pivot unchanged."
+                          name="PivotUsage">2</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Pivot Transformation\Pivot.Inputs[Pivot Default Input].Columns[Year]"
+                      cachedDataType="i4"
+                      cachedName="Year"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\Pivot Transformation\Sort.Outputs[Sort Output].Columns[Year]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Describes how the input column participates in the pivot operation. It can help define a set of related records, it can hold the key that uniquely identifies a row within the related set and upon which the values are pivoted, it can hold a value that gets transferred into a pivoted column or it can contain a value that simply passes straight though the pivot unchanged."
+                          name="PivotUsage">1</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Pivot Transformation\Pivot.Outputs[Pivot Default Output]"
+                  name="Pivot Default Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Pivot Transformation\Pivot.Outputs[Pivot Default Output].Columns[Year]"
+                      dataType="i4"
+                      lineageId="Package\Pivot Transformation\Pivot.Outputs[Pivot Default Output].Columns[Year]"
+                      name="Year">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The lineage identifier of an input column that contains a PivotedValue or the value -1. The value -1 indicates the column is not used in a pivot operation"
+                          name="SourceColumn">#{Package\Pivot Transformation\Sort.Outputs[Sort Output].Columns[Year]}</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies a value that matches one of the possible values from the input column that is marked as the pivot key by the PivotUsage property."
+                          expressionType="Notify"
+                          name="PivotKeyValue" />
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Pivot Transformation\Pivot.Outputs[Pivot Default Output].Columns[C_1_Sales]"
+                      dataType="r8"
+                      lineageId="Package\Pivot Transformation\Pivot.Outputs[Pivot Default Output].Columns[C_1_Sales]"
+                      name="C_1_Sales">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The lineage identifier of an input column that contains a PivotedValue or the value -1. The value -1 indicates the column is not used in a pivot operation"
+                          name="SourceColumn">#{Package\Pivot Transformation\Sort.Outputs[Sort Output].Columns[Sales]}</property>
+                        <property
+                          dataType="System.String"
+                          description="Specifies a value that matches one of the possible values from the input column that is marked as the pivot key by the PivotUsage property."
+                          expressionType="Notify"
+                          name="PivotKeyValue">1</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Pivot Transformation\Pivot.Outputs[Pivot Default Output].Columns[C_10_Sales]"
+                      dataType="r8"
+                      lineageId="Package\Pivot Transformation\Pivot.Outputs[Pivot Default Output].Columns[C_10_Sales]"
+                      name="C_10_Sales">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The lineage identifier of an input column that contains a PivotedValue or the value -1. The value -1 indicates the column is not used in a pivot operation"
+                          name="SourceColumn">#{Package\Pivot Transformation\Sort.Outputs[Sort Output].Columns[Sales]}</property>
+                        <property
+                          dataType="System.String"
+                          description="Specifies a value that matches one of the possible values from the input column that is marked as the pivot key by the PivotUsage property."
+                          expressionType="Notify"
+                          name="PivotKeyValue">10</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Pivot Transformation\Pivot.Outputs[Pivot Default Output].Columns[C_11_Sales]"
+                      dataType="r8"
+                      lineageId="Package\Pivot Transformation\Pivot.Outputs[Pivot Default Output].Columns[C_11_Sales]"
+                      name="C_11_Sales">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The lineage identifier of an input column that contains a PivotedValue or the value -1. The value -1 indicates the column is not used in a pivot operation"
+                          name="SourceColumn">#{Package\Pivot Transformation\Sort.Outputs[Sort Output].Columns[Sales]}</property>
+                        <property
+                          dataType="System.String"
+                          description="Specifies a value that matches one of the possible values from the input column that is marked as the pivot key by the PivotUsage property."
+                          expressionType="Notify"
+                          name="PivotKeyValue">11</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Pivot Transformation\Pivot.Outputs[Pivot Default Output].Columns[C_12_Sales]"
+                      dataType="r8"
+                      lineageId="Package\Pivot Transformation\Pivot.Outputs[Pivot Default Output].Columns[C_12_Sales]"
+                      name="C_12_Sales">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The lineage identifier of an input column that contains a PivotedValue or the value -1. The value -1 indicates the column is not used in a pivot operation"
+                          name="SourceColumn">#{Package\Pivot Transformation\Sort.Outputs[Sort Output].Columns[Sales]}</property>
+                        <property
+                          dataType="System.String"
+                          description="Specifies a value that matches one of the possible values from the input column that is marked as the pivot key by the PivotUsage property."
+                          expressionType="Notify"
+                          name="PivotKeyValue">12</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Pivot Transformation\Pivot.Outputs[Pivot Default Output].Columns[C_2_Sales]"
+                      dataType="r8"
+                      lineageId="Package\Pivot Transformation\Pivot.Outputs[Pivot Default Output].Columns[C_2_Sales]"
+                      name="C_2_Sales">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The lineage identifier of an input column that contains a PivotedValue or the value -1. The value -1 indicates the column is not used in a pivot operation"
+                          name="SourceColumn">#{Package\Pivot Transformation\Sort.Outputs[Sort Output].Columns[Sales]}</property>
+                        <property
+                          dataType="System.String"
+                          description="Specifies a value that matches one of the possible values from the input column that is marked as the pivot key by the PivotUsage property."
+                          expressionType="Notify"
+                          name="PivotKeyValue">2</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Pivot Transformation\Pivot.Outputs[Pivot Default Output].Columns[C_3_Sales]"
+                      dataType="r8"
+                      lineageId="Package\Pivot Transformation\Pivot.Outputs[Pivot Default Output].Columns[C_3_Sales]"
+                      name="C_3_Sales">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The lineage identifier of an input column that contains a PivotedValue or the value -1. The value -1 indicates the column is not used in a pivot operation"
+                          name="SourceColumn">#{Package\Pivot Transformation\Sort.Outputs[Sort Output].Columns[Sales]}</property>
+                        <property
+                          dataType="System.String"
+                          description="Specifies a value that matches one of the possible values from the input column that is marked as the pivot key by the PivotUsage property."
+                          expressionType="Notify"
+                          name="PivotKeyValue">3</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Pivot Transformation\Pivot.Outputs[Pivot Default Output].Columns[C_4_Sales]"
+                      dataType="r8"
+                      lineageId="Package\Pivot Transformation\Pivot.Outputs[Pivot Default Output].Columns[C_4_Sales]"
+                      name="C_4_Sales">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The lineage identifier of an input column that contains a PivotedValue or the value -1. The value -1 indicates the column is not used in a pivot operation"
+                          name="SourceColumn">#{Package\Pivot Transformation\Sort.Outputs[Sort Output].Columns[Sales]}</property>
+                        <property
+                          dataType="System.String"
+                          description="Specifies a value that matches one of the possible values from the input column that is marked as the pivot key by the PivotUsage property."
+                          expressionType="Notify"
+                          name="PivotKeyValue">4</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Pivot Transformation\Pivot.Outputs[Pivot Default Output].Columns[C_5_Sales]"
+                      dataType="r8"
+                      lineageId="Package\Pivot Transformation\Pivot.Outputs[Pivot Default Output].Columns[C_5_Sales]"
+                      name="C_5_Sales">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The lineage identifier of an input column that contains a PivotedValue or the value -1. The value -1 indicates the column is not used in a pivot operation"
+                          name="SourceColumn">#{Package\Pivot Transformation\Sort.Outputs[Sort Output].Columns[Sales]}</property>
+                        <property
+                          dataType="System.String"
+                          description="Specifies a value that matches one of the possible values from the input column that is marked as the pivot key by the PivotUsage property."
+                          expressionType="Notify"
+                          name="PivotKeyValue">5</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Pivot Transformation\Pivot.Outputs[Pivot Default Output].Columns[C_6_Sales]"
+                      dataType="r8"
+                      lineageId="Package\Pivot Transformation\Pivot.Outputs[Pivot Default Output].Columns[C_6_Sales]"
+                      name="C_6_Sales">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The lineage identifier of an input column that contains a PivotedValue or the value -1. The value -1 indicates the column is not used in a pivot operation"
+                          name="SourceColumn">#{Package\Pivot Transformation\Sort.Outputs[Sort Output].Columns[Sales]}</property>
+                        <property
+                          dataType="System.String"
+                          description="Specifies a value that matches one of the possible values from the input column that is marked as the pivot key by the PivotUsage property."
+                          expressionType="Notify"
+                          name="PivotKeyValue">6</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Pivot Transformation\Pivot.Outputs[Pivot Default Output].Columns[C_7_Sales]"
+                      dataType="r8"
+                      lineageId="Package\Pivot Transformation\Pivot.Outputs[Pivot Default Output].Columns[C_7_Sales]"
+                      name="C_7_Sales">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The lineage identifier of an input column that contains a PivotedValue or the value -1. The value -1 indicates the column is not used in a pivot operation"
+                          name="SourceColumn">#{Package\Pivot Transformation\Sort.Outputs[Sort Output].Columns[Sales]}</property>
+                        <property
+                          dataType="System.String"
+                          description="Specifies a value that matches one of the possible values from the input column that is marked as the pivot key by the PivotUsage property."
+                          expressionType="Notify"
+                          name="PivotKeyValue">7</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Pivot Transformation\Pivot.Outputs[Pivot Default Output].Columns[C_8_Sales]"
+                      dataType="r8"
+                      lineageId="Package\Pivot Transformation\Pivot.Outputs[Pivot Default Output].Columns[C_8_Sales]"
+                      name="C_8_Sales">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The lineage identifier of an input column that contains a PivotedValue or the value -1. The value -1 indicates the column is not used in a pivot operation"
+                          name="SourceColumn">#{Package\Pivot Transformation\Sort.Outputs[Sort Output].Columns[Sales]}</property>
+                        <property
+                          dataType="System.String"
+                          description="Specifies a value that matches one of the possible values from the input column that is marked as the pivot key by the PivotUsage property."
+                          expressionType="Notify"
+                          name="PivotKeyValue">8</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Pivot Transformation\Pivot.Outputs[Pivot Default Output].Columns[C_9_Sales]"
+                      dataType="r8"
+                      lineageId="Package\Pivot Transformation\Pivot.Outputs[Pivot Default Output].Columns[C_9_Sales]"
+                      name="C_9_Sales">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The lineage identifier of an input column that contains a PivotedValue or the value -1. The value -1 indicates the column is not used in a pivot operation"
+                          name="SourceColumn">#{Package\Pivot Transformation\Sort.Outputs[Sort Output].Columns[Sales]}</property>
+                        <property
+                          dataType="System.String"
+                          description="Specifies a value that matches one of the possible values from the input column that is marked as the pivot key by the PivotUsage property."
+                          expressionType="Notify"
+                          name="PivotKeyValue">9</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Pivot Transformation\Pivot.Outputs[Pivot Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Pivot Error Output"
+                  synchronousInputId="Package\Pivot Transformation\Pivot.Inputs[Pivot Default Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Pivot Transformation\Pivot.Outputs[Pivot Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Pivot Transformation\Pivot.Outputs[Pivot Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Pivot Transformation\Pivot.Outputs[Pivot Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Pivot Transformation\Pivot.Outputs[Pivot Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Pivot Transformation\Sort"
+              componentClassID="Microsoft.Sort"
+              contactInfo="Sort;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Sorts input data in ascending or descending order when it cannot be sorted at its source. For example, sort sales data by 'customer id' before it is written to a flat file and delivered to another department. Note: We do not recommend this transformation for large data flows."
+              name="Sort"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the Sort transformation removes rows with duplicate sort values."
+                  name="EliminateDuplicates">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the maximum number of threads to use for sorting."
+                  expressionType="Notify"
+                  name="MaximumThreads">-1</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\Pivot Transformation\Sort.Inputs[Sort Input]"
+                  name="Sort Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Pivot Transformation\Sort.Inputs[Sort Input].Columns[Sales]"
+                      cachedDataType="r8"
+                      cachedName="Sales"
+                      lineageId="Package\Pivot Transformation\Aggregate.Outputs[Aggregate Output 1].Columns[Sales]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Pivot Transformation\Sort.Inputs[Sort Input].Columns[Year]"
+                      cachedDataType="i4"
+                      cachedName="Year"
+                      lineageId="Package\Pivot Transformation\Aggregate.Outputs[Aggregate Output 1].Columns[Year]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">1</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Pivot Transformation\Sort.Inputs[Sort Input].Columns[Month]"
+                      cachedDataType="i4"
+                      cachedName="Month"
+                      lineageId="Package\Pivot Transformation\Aggregate.Outputs[Aggregate Output 1].Columns[Month]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Pivot Transformation\Sort.Outputs[Sort Output]"
+                  isSorted="true"
+                  name="Sort Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Pivot Transformation\Sort.Outputs[Sort Output].Columns[Sales]"
+                      dataType="r8"
+                      lineageId="Package\Pivot Transformation\Sort.Outputs[Sort Output].Columns[Sales]"
+                      name="Sales">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Pivot Transformation\Aggregate.Outputs[Aggregate Output 1].Columns[Sales]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Pivot Transformation\Sort.Outputs[Sort Output].Columns[Year]"
+                      dataType="i4"
+                      lineageId="Package\Pivot Transformation\Sort.Outputs[Sort Output].Columns[Year]"
+                      name="Year"
+                      sortKeyPosition="1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Pivot Transformation\Aggregate.Outputs[Aggregate Output 1].Columns[Year]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Pivot Transformation\Sort.Outputs[Sort Output].Columns[Month]"
+                      dataType="i4"
+                      lineageId="Package\Pivot Transformation\Sort.Outputs[Sort Output].Columns[Month]"
+                      name="Month">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Pivot Transformation\Aggregate.Outputs[Aggregate Output 1].Columns[Month]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Pivot Transformation\Unpivot"
+              componentClassID="Microsoft.UnPivot"
+              contactInfo="Unpivot;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Expands an un-normalized data flow into a more normalized version. Values from multiple columns of a single record expand to multiple records in a single column. For example, expand a table that lists athletic scores with a column for each game to more records and a single score column."
+              name="Unpivot">
+              <inputs>
+                <input
+                  refId="Package\Pivot Transformation\Unpivot.Inputs[Unpivot Input]"
+                  hasSideEffects="true"
+                  name="Unpivot Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Pivot Transformation\Unpivot.Inputs[Unpivot Input].Columns[C_1_Sales]"
+                      cachedDataType="r8"
+                      cachedName="C_1_Sales"
+                      lineageId="Package\Pivot Transformation\Pivot.Outputs[Pivot Default Output].Columns[C_1_Sales]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The lineage ID of the output column that will receive the value from this input column. Or -1 if column's value is not used in output rows."
+                          name="DestinationColumn">#{Package\Pivot Transformation\Unpivot.Outputs[Unpivot Output].Columns[Sales]}</property>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the value written to the PivotKey column in the output row."
+                          expressionType="Notify"
+                          name="PivotKeyValue">1</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Pivot Transformation\Unpivot.Inputs[Unpivot Input].Columns[C_10_Sales]"
+                      cachedDataType="r8"
+                      cachedName="C_10_Sales"
+                      lineageId="Package\Pivot Transformation\Pivot.Outputs[Pivot Default Output].Columns[C_10_Sales]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The lineage ID of the output column that will receive the value from this input column. Or -1 if column's value is not used in output rows."
+                          name="DestinationColumn">#{Package\Pivot Transformation\Unpivot.Outputs[Unpivot Output].Columns[Sales]}</property>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the value written to the PivotKey column in the output row."
+                          expressionType="Notify"
+                          name="PivotKeyValue">10</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Pivot Transformation\Unpivot.Inputs[Unpivot Input].Columns[C_11_Sales]"
+                      cachedDataType="r8"
+                      cachedName="C_11_Sales"
+                      lineageId="Package\Pivot Transformation\Pivot.Outputs[Pivot Default Output].Columns[C_11_Sales]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The lineage ID of the output column that will receive the value from this input column. Or -1 if column's value is not used in output rows."
+                          name="DestinationColumn">#{Package\Pivot Transformation\Unpivot.Outputs[Unpivot Output].Columns[Sales]}</property>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the value written to the PivotKey column in the output row."
+                          expressionType="Notify"
+                          name="PivotKeyValue">11</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Pivot Transformation\Unpivot.Inputs[Unpivot Input].Columns[C_12_Sales]"
+                      cachedDataType="r8"
+                      cachedName="C_12_Sales"
+                      lineageId="Package\Pivot Transformation\Pivot.Outputs[Pivot Default Output].Columns[C_12_Sales]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The lineage ID of the output column that will receive the value from this input column. Or -1 if column's value is not used in output rows."
+                          name="DestinationColumn">#{Package\Pivot Transformation\Unpivot.Outputs[Unpivot Output].Columns[Sales]}</property>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the value written to the PivotKey column in the output row."
+                          expressionType="Notify"
+                          name="PivotKeyValue">12</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Pivot Transformation\Unpivot.Inputs[Unpivot Input].Columns[C_2_Sales]"
+                      cachedDataType="r8"
+                      cachedName="C_2_Sales"
+                      lineageId="Package\Pivot Transformation\Pivot.Outputs[Pivot Default Output].Columns[C_2_Sales]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The lineage ID of the output column that will receive the value from this input column. Or -1 if column's value is not used in output rows."
+                          name="DestinationColumn">#{Package\Pivot Transformation\Unpivot.Outputs[Unpivot Output].Columns[Sales]}</property>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the value written to the PivotKey column in the output row."
+                          expressionType="Notify"
+                          name="PivotKeyValue">2</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Pivot Transformation\Unpivot.Inputs[Unpivot Input].Columns[C_3_Sales]"
+                      cachedDataType="r8"
+                      cachedName="C_3_Sales"
+                      lineageId="Package\Pivot Transformation\Pivot.Outputs[Pivot Default Output].Columns[C_3_Sales]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The lineage ID of the output column that will receive the value from this input column. Or -1 if column's value is not used in output rows."
+                          name="DestinationColumn">#{Package\Pivot Transformation\Unpivot.Outputs[Unpivot Output].Columns[Sales]}</property>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the value written to the PivotKey column in the output row."
+                          expressionType="Notify"
+                          name="PivotKeyValue">3</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Pivot Transformation\Unpivot.Inputs[Unpivot Input].Columns[C_4_Sales]"
+                      cachedDataType="r8"
+                      cachedName="C_4_Sales"
+                      lineageId="Package\Pivot Transformation\Pivot.Outputs[Pivot Default Output].Columns[C_4_Sales]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The lineage ID of the output column that will receive the value from this input column. Or -1 if column's value is not used in output rows."
+                          name="DestinationColumn">#{Package\Pivot Transformation\Unpivot.Outputs[Unpivot Output].Columns[Sales]}</property>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the value written to the PivotKey column in the output row."
+                          expressionType="Notify"
+                          name="PivotKeyValue">4</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Pivot Transformation\Unpivot.Inputs[Unpivot Input].Columns[C_5_Sales]"
+                      cachedDataType="r8"
+                      cachedName="C_5_Sales"
+                      lineageId="Package\Pivot Transformation\Pivot.Outputs[Pivot Default Output].Columns[C_5_Sales]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The lineage ID of the output column that will receive the value from this input column. Or -1 if column's value is not used in output rows."
+                          name="DestinationColumn">#{Package\Pivot Transformation\Unpivot.Outputs[Unpivot Output].Columns[Sales]}</property>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the value written to the PivotKey column in the output row."
+                          expressionType="Notify"
+                          name="PivotKeyValue">5</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Pivot Transformation\Unpivot.Inputs[Unpivot Input].Columns[C_6_Sales]"
+                      cachedDataType="r8"
+                      cachedName="C_6_Sales"
+                      lineageId="Package\Pivot Transformation\Pivot.Outputs[Pivot Default Output].Columns[C_6_Sales]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The lineage ID of the output column that will receive the value from this input column. Or -1 if column's value is not used in output rows."
+                          name="DestinationColumn">#{Package\Pivot Transformation\Unpivot.Outputs[Unpivot Output].Columns[Sales]}</property>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the value written to the PivotKey column in the output row."
+                          expressionType="Notify"
+                          name="PivotKeyValue">6</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Pivot Transformation\Unpivot.Inputs[Unpivot Input].Columns[C_7_Sales]"
+                      cachedDataType="r8"
+                      cachedName="C_7_Sales"
+                      lineageId="Package\Pivot Transformation\Pivot.Outputs[Pivot Default Output].Columns[C_7_Sales]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The lineage ID of the output column that will receive the value from this input column. Or -1 if column's value is not used in output rows."
+                          name="DestinationColumn">#{Package\Pivot Transformation\Unpivot.Outputs[Unpivot Output].Columns[Sales]}</property>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the value written to the PivotKey column in the output row."
+                          expressionType="Notify"
+                          name="PivotKeyValue">7</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Pivot Transformation\Unpivot.Inputs[Unpivot Input].Columns[C_8_Sales]"
+                      cachedDataType="r8"
+                      cachedName="C_8_Sales"
+                      lineageId="Package\Pivot Transformation\Pivot.Outputs[Pivot Default Output].Columns[C_8_Sales]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The lineage ID of the output column that will receive the value from this input column. Or -1 if column's value is not used in output rows."
+                          name="DestinationColumn">#{Package\Pivot Transformation\Unpivot.Outputs[Unpivot Output].Columns[Sales]}</property>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the value written to the PivotKey column in the output row."
+                          expressionType="Notify"
+                          name="PivotKeyValue">8</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Pivot Transformation\Unpivot.Inputs[Unpivot Input].Columns[C_9_Sales]"
+                      cachedDataType="r8"
+                      cachedName="C_9_Sales"
+                      lineageId="Package\Pivot Transformation\Pivot.Outputs[Pivot Default Output].Columns[C_9_Sales]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The lineage ID of the output column that will receive the value from this input column. Or -1 if column's value is not used in output rows."
+                          name="DestinationColumn">#{Package\Pivot Transformation\Unpivot.Outputs[Unpivot Output].Columns[Sales]}</property>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the value written to the PivotKey column in the output row."
+                          expressionType="Notify"
+                          name="PivotKeyValue">9</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Pivot Transformation\Unpivot.Inputs[Unpivot Input].Columns[Year]"
+                      cachedDataType="i4"
+                      cachedName="Year"
+                      lineageId="Package\Pivot Transformation\Pivot.Outputs[Pivot Default Output].Columns[Year]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The lineage ID of the output column that will receive the value from this input column. Or -1 if column's value is not used in output rows."
+                          name="DestinationColumn">#{Package\Pivot Transformation\Unpivot.Outputs[Unpivot Output].Columns[Year]}</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the value written to the PivotKey column in the output row."
+                          expressionType="Notify"
+                          name="PivotKeyValue" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Pivot Transformation\Unpivot.Outputs[Unpivot Output]"
+                  name="Unpivot Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Pivot Transformation\Unpivot.Outputs[Unpivot Output].Columns[Month]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Pivot Transformation\Unpivot.Outputs[Unpivot Output].Columns[Month]"
+                      name="Month">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the value in the PivotKeyValue property is written to the column in the new row."
+                          name="PivotKey">true</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Pivot Transformation\Unpivot.Outputs[Unpivot Output].Columns[Sales]"
+                      dataType="r8"
+                      lineageId="Package\Pivot Transformation\Unpivot.Outputs[Unpivot Output].Columns[Sales]"
+                      name="Sales">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the value in the PivotKeyValue property is written to the column in the new row."
+                          name="PivotKey">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Pivot Transformation\Unpivot.Outputs[Unpivot Output].Columns[Year]"
+                      dataType="i4"
+                      lineageId="Package\Pivot Transformation\Unpivot.Outputs[Unpivot Output].Columns[Year]"
+                      name="Year">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the value in the PivotKeyValue property is written to the column in the new row."
+                          name="PivotKey">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Pivot Transformation.Paths[Aggregate Output 1]"
+              endId="Package\Pivot Transformation\Sort.Inputs[Sort Input]"
+              name="Aggregate Output 1"
+              startId="Package\Pivot Transformation\Aggregate.Outputs[Aggregate Output 1]" />
+            <path
+              refId="Package\Pivot Transformation.Paths[Derived Column Output]"
+              endId="Package\Pivot Transformation\Aggregate.Inputs[Aggregate Input 1]"
+              name="Derived Column Output"
+              startId="Package\Pivot Transformation\Generate Date Ranges.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\Pivot Transformation.Paths[Excel Source Output]"
+              endId="Package\Pivot Transformation\Generate Date Ranges.Inputs[Derived Column Input]"
+              name="Excel Source Output"
+              startId="Package\Pivot Transformation\Global Superstore.Outputs[Excel Source Output]" />
+            <path
+              refId="Package\Pivot Transformation.Paths[Multicast Output 1]"
+              endId="Package\Pivot Transformation\Unpivot.Inputs[Unpivot Input]"
+              name="Multicast Output 1"
+              startId="Package\Pivot Transformation\Multicast.Outputs[Multicast Output 1]" />
+            <path
+              refId="Package\Pivot Transformation.Paths[Pivot Default Output]"
+              endId="Package\Pivot Transformation\Multicast.Inputs[Multicast Input 1]"
+              name="Pivot Default Output"
+              startId="Package\Pivot Transformation\Pivot.Outputs[Pivot Default Output]" />
+            <path
+              refId="Package\Pivot Transformation.Paths[Sort Output]"
+              endId="Package\Pivot Transformation\Pivot.Inputs[Pivot Default Input]"
+              name="Sort Output"
+              startId="Package\Pivot Transformation\Sort.Outputs[Sort Output]" />
+            <path
+              refId="Package\Pivot Transformation.Paths[Unpivot Output]"
+              endId="Package\Pivot Transformation\Multicast 1.Inputs[Multicast Input 1]"
+              name="Unpivot Output"
+              startId="Package\Pivot Transformation\Unpivot.Outputs[Unpivot Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="174.4,41.6"
+          Id="Package\Pivot Transformation"
+          TopLeft="415.499983708065,138.10000105381" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Pivot Transformation">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="119.2,41.6"
+          Id="Package\Pivot Transformation\Multicast"
+          TopLeft="101.333330717351,457.700003554027" />
+        <NodeLayout
+          Size="184.8,41.6"
+          Id="Package\Pivot Transformation\Generate Date Ranges"
+          TopLeft="64.6666655076884,118.126667553796" />
+        <NodeLayout
+          Size="113.6,41.6"
+          Id="Package\Pivot Transformation\Unpivot"
+          TopLeft="105.499996026357,537.633337562349" />
+        <NodeLayout
+          Size="162.4,41.6"
+          Id="Package\Pivot Transformation\Global Superstore"
+          TopLeft="74.6666639182303,33.2333335537381" />
+        <NodeLayout
+          Size="97.6,41.6"
+          Id="Package\Pivot Transformation\Sort"
+          TopLeft="108.833329227236,287.913335553911" />
+        <NodeLayout
+          Size="101.6,41.6"
+          Id="Package\Pivot Transformation\Pivot"
+          TopLeft="107.999995927016,372.806669553968" />
+        <NodeLayout
+          Size="128,41.6"
+          Id="Package\Pivot Transformation\Multicast 1"
+          TopLeft="102.166664017571,614.700004463196" />
+        <NodeLayout
+          Size="126.4,41.6"
+          Id="Package\Pivot Transformation\Aggregate"
+          TopLeft="100.49999622504,202.153334880299" />
+        <EdgeLayout
+          Id="Package\Pivot Transformation.Paths[Unpivot Output]"
+          TopLeft="164.233330021964,579.233337562349">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,35.4666669008467"
+              Start="0,0"
+              End="0,27.9666669008467">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,27.9666669008467" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-8,5.98333345042334,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Pivot Transformation.Paths[Sort Output]"
+          TopLeft="158.216662577126,329.513335553911">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,43.2933340000576"
+              Start="0,0"
+              End="0,35.7933340000576">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,35.7933340000576" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Pivot Transformation.Paths[Pivot Default Output]"
+          TopLeft="159.866663322184,414.406669553968">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,43.2933340000582"
+              Start="0,0"
+              End="0,35.7933340000582">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,35.7933340000582" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-8,9.89666700002908,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Pivot Transformation.Paths[Multicast Output 1]"
+          TopLeft="161.616663371854,499.300003554027">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,38.3333340083227"
+              Start="0,0"
+              End="0,30.8333340083227">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,30.8333340083227" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Pivot Transformation.Paths[Excel Source Output]"
+          TopLeft="156.466664712959,74.8333335537381">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,43.2933340000578"
+              Start="0,0"
+              End="0,35.7933340000578">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,35.7933340000578" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Pivot Transformation.Paths[Derived Column Output]"
+          TopLeft="160.383330866364,159.726667553796">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,42.4266673265027"
+              Start="0,0"
+              End="0,34.9266673265027">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,34.9266673265027" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Pivot Transformation.Paths[Aggregate Output 1]"
+          TopLeft="160.666662726138,243.753334880299">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,44.1600006736123"
+              Start="0,0"
+              End="0,36.6600006736123">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,36.6600006736123" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Pivot Transformation\Global Superstore">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
